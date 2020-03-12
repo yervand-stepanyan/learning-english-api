@@ -5,11 +5,13 @@ const User = require('../models/User');
 
 module.exports.login = async (req, res) => {
   const candidate = await User.findOne({ email: req.body.email });
+
   if (candidate) {
     const passwordResult = bcrypt.compareSync(
       req.body.password,
       candidate.password
     );
+
     if (passwordResult) {
       const token = jwt.sign(
         {
@@ -19,6 +21,7 @@ module.exports.login = async (req, res) => {
         keys.jwt,
         { expiresIn: 60 * 60 }
       );
+
       res.status(200).json({
         token: `Barear ${token}`
       });
@@ -51,8 +54,10 @@ module.exports.register = async (req, res) => {
       password: bcrypt.hashSync(password, salt),
       testToComplete: req.body.testToComplete
     });
+
     try {
       await user.save();
+
       res.status(201).json(user);
     } catch (e) {
       console.log(e);
@@ -63,6 +68,7 @@ module.exports.register = async (req, res) => {
 module.exports.getAll = async (req, res) => {
   try {
     const user = await User.find();
+
     res.status(200).json(user);
   } catch (e) {
     console.log(e);

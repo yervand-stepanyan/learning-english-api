@@ -32,10 +32,12 @@ app.use(
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json);
 
+const authRoutes = require('./routes/auth');
 const audioRoutes = require('./routes/audio');
 const testRoutes = require('./routes/test');
 const textRoutes = require('./routes/text');
 
+app.use('/api/auth', authRoutes);
 app.use('/api/audio', audioRoutes);
 app.use('/api/test', testRoutes);
 app.use('/api/text', textRoutes);

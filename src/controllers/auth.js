@@ -18,7 +18,7 @@ module.exports.login = async (req, res) => {
           email: candidate.email,
           userId: candidate.id
         },
-        keys.jwt,
+        keys.JWT,
         { expiresIn: 60 * 60 }
       );
 

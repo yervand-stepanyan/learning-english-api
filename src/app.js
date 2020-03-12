@@ -8,7 +8,7 @@ const keys = require('./config/variables.config');
 const app = express();
 
 mongoose
-  .connect(keys.mongoURI, {
+  .connect(keys.MONGO_URI, {
     useUnifiedTopology: true,
     useCreateIndex: true,
     useNewUrlParser: true
@@ -30,7 +30,7 @@ app.use(
 );
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json);
+app.use(bodyParser.json());
 
 const authRoutes = require('./routes/auth');
 const audioRoutes = require('./routes/audio');
